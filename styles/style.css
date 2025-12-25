@@ -74,8 +74,6 @@ header {
     display: flex;
     flex-wrap: wrap;
 
-
-    width: 70%;
     height: 70%;
     margin: 10px;
 }
@@ -116,4 +114,53 @@ body:has(.card_linux:hover)::before {
 .card_linux:hover ~ body::after,
 body:has(.card_linux:hover)::after {
     opacity: 1;
+}
+
+@media (max-width: 559px) {
+    .card_linux {
+    background-color: rgba(10, 10, 10, 0.6);
+    padding: 30px;
+    margin: 5px;
+    border-radius: 15px;
+
+    width: 100%;
+    height: 150%;
+
+    transition: all 0.2s ease-in-out;
+    }
+
+    .card_linux > img {
+        width: 100%;
+    }
+
+    body::before {
+        content: '';
+        position: fixed; /* Фиксируем на одном месте */
+        left: 0; right: 0; /* Вся ширин */
+        top: 0; bottom: 0; /* Вся высота */
+        z-index: -1;
+        background-image: var(--img-back);
+        background-repeat: no-repeat;
+        background-position-y: 50%;
+        background-position-x: 50%;
+        background-size: 120%;
+        filter: blur(var(--back-blur)); /* Размытие */
+
+        transition: all 0.5s ease-in-out;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        left: 0; right: 0;
+        top: 0; bottom: 0;
+        z-index: -1;
+        background-image: var(--img-back-hover);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 120%;
+        filter: blur(var(--back-blur));
+        opacity: 0;
+        transition: all 0.5s ease-in-out;
+    }
 }
