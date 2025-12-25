@@ -1,15 +1,63 @@
 @import url('./reset.css');
 @import url('./fonts.css');
 
+:root {
+    --img-back: url("../images/back.png");
+    --img-back-hover: none;
+    --back-blur: 0px;
+}
+
 * {
     font-family: 'Adwaita';
+}
+
+body::before {
+    content: '';
+    position: fixed; /* Фиксируем на одном месте */
+    left: 0; right: 0; /* Вся ширин */
+    top: 0; bottom: 0; /* Вся высота */
+    z-index: -1;
+    background-image: var(--img-back);
+    background-repeat: no-repeat;
+    background-position-y: 50%;
+    background-position-x: 50%;
+    background-size: 50%;
+    filter: blur(var(--back-blur)); /* Размытие */
+
+    transition: all 0.5s ease-in-out;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    left: 0; right: 0;
+    top: 0; bottom: 0;
+    z-index: -1;
+    background-image: var(--img-back-hover);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    filter: blur(var(--back-blur));
+    opacity: 0;
+    transition: all 0.5s ease-in-out;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+    
+    z-index: 1;
+}
+
+
+header {
+    background-color: black;
+    padding: 10px;
 }
 
 .preview {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 10px;
 }
 
 .preview > a > img {
@@ -18,4 +66,54 @@
 
 .preview > h1 {
     font-size: 150%;
+    font-family: 'Adwaita';
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+
+
+    width: 70%;
+    height: 70%;
+    margin: 10px;
+}
+
+.card_linux {
+    background-color: rgba(10, 10, 10, 0.6);
+    padding: 30px;
+    margin: 5px;
+    border-radius: 15px;
+    width: 200px;
+    height: 150%;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.card_linux > img {
+    width: 100%;
+}
+
+.card_linux:hover {
+    transform: 
+        rotate3d(7.5, 15, -1, 20deg)
+    ;
+    background: hsla(0, 0%, 0%, 0.6);
+    background: linear-gradient(45deg, hsla(0, 0%, 0%, 1) 0%, hsla(0, 0%, 17%, 1) 93%, hsla(0, 0%, 17%, 1) 100%);
+    background: -moz-linear-gradient(45deg, hsla(0, 0%, 0%, 1) 0%, hsla(0, 0%, 17%, 1) 93%, hsla(0, 0%, 17%, 1) 100%);
+    background: -webkit-linear-gradient(45deg, hsla(0, 0%, 0%, 1) 0%, hsla(0, 0%, 17%, 1) 93%, hsla(0, 0%, 17%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#000000", endColorstr="#2B2B2B", GradientType=1 );
+
+    --img-back: url("../images/arch_linux.png");
+}
+
+.card_linux:hover ~ body::before,
+body:has(.card_linux:hover)::before {
+    opacity: 0;
+}
+
+.card_linux:hover ~ body::after,
+body:has(.card_linux:hover)::after {
+    opacity: 1;
 }
